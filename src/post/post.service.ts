@@ -99,7 +99,6 @@ export class PostService {
     if (!find) {
       throw new NotFoundException('Статья не найдена');
     }
-    return find;
     return this.repository.delete(id);
   }
 }

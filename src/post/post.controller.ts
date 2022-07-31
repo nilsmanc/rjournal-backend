@@ -1,4 +1,3 @@
-import { SearchPostDto } from './dto/search-post.dto';
 import {
   Controller,
   Get,
@@ -12,6 +11,7 @@ import {
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { SearchPostDto } from './dto/search-post.dto';
 
 @Controller('posts')
 export class PostController {
