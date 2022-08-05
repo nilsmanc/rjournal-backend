@@ -1,3 +1,4 @@
+import { OutputBlockData } from './../dto/create-post.dto';
 import {
   Entity,
   Column,
@@ -14,8 +15,11 @@ export class PostEntity {
   @Column()
   title: string;
 
+  @Column({ type: 'jsonb' })
+  body: OutputBlockData[];
+
   @Column()
-  body: string;
+  description: string;
 
   @Column({ default: 0 })
   views: number;
