@@ -5,7 +5,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Entity('posts')
 export class PostEntity {
@@ -20,6 +22,11 @@ export class PostEntity {
 
   @Column()
   description: string;
+
+  @ManyToOne(() => UserEntity, {
+    eager: true,
+  })
+  user: UserEntity;
 
   @Column({ default: 0 })
   views: number;

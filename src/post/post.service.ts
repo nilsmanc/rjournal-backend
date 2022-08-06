@@ -1,6 +1,10 @@
 import { SearchPostDto } from './dto/search-post.dto';
 import { PostEntity } from './entities/post.entity';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -37,6 +41,8 @@ export class PostService {
 
   async search(dto: SearchPostDto) {
     const qb = this.repository.createQueryBuilder('p');
+
+    qb.leftJoinAndSelect('p.user', 'user');
 
     qb.limit(dto.limit || 0);
     qb.take(dto.limit || 10);
@@ -82,7 +88,7 @@ export class PostService {
     return this.repository.findOne(id);
   }
 
-  create(dto: CreatePostDto) {
+  create(dto: CreatePostDto, userId: number) {
     const firstParagraph = dto.body.find((obj) => obj.type === 'paragraph')
       ?.data?.text;
 
@@ -90,11 +96,12 @@ export class PostService {
       title: dto.title,
       body: dto.body,
       tags: dto.tags,
+      user: { id: userId },
       description: firstParagraph || '',
     });
   }
 
-  async update(id: number, dto: UpdatePostDto) {
+  async update(id: number, dto: UpdatePostDto, userId: number) {
     const find = await this.repository.findOne(+id);
     if (!find) {
       throw new NotFoundException('Статья не найдена');
@@ -105,14 +112,19 @@ export class PostService {
       title: dto.title,
       body: dto.body,
       tags: dto.tags,
+      user: { id: userId },
       description: firstParagraph || '',
     });
   }
 
-  async remove(id: number) {
+  async remove(id: number, userId: number) {
     const find = await this.repository.findOne(+id);
     if (!find) {
       throw new NotFoundException('Статья не найдена');
+    }
+
+    if (find.user.id !== userId) {
+      throw new ForbiddenException('Нет доступа к этой статье');
     }
     return this.repository.delete(id);
   }
