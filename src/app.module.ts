@@ -23,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
       entities: [UserEntity, PostEntity, CommentEntity],
       synchronize: false,
       connectionString: process.env.DATABASE_URL,
+      ssl: true,
     }),
     UserModule,
     PostModule,
