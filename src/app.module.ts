@@ -21,6 +21,7 @@ import { AuthModule } from './auth/auth.module';
       database: 'rjournal',
       entities: [UserEntity, PostEntity, CommentEntity],
       synchronize: false,
+      connectionString: process.env.DATABASE_URL,
     }),
     UserModule,
     PostModule,
