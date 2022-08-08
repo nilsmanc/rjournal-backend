@@ -10,6 +10,8 @@ import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { AuthModule } from './auth/auth.module';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
