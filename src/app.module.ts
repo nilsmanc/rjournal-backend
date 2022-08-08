@@ -24,6 +24,9 @@ import { AuthModule } from './auth/auth.module';
       synchronize: false,
       connectionString: process.env.DATABASE_URL,
       ssl: true,
+      tls: {
+        rejectUnauthorized: false,
+      },
     }),
     UserModule,
     PostModule,
