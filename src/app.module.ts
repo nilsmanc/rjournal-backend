@@ -20,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
       password: 'password',
       database: 'rjournal',
       entities: [UserEntity, PostEntity, CommentEntity],
-      synchronize: true,
+      synchronize: false,
     }),
     UserModule,
     PostModule,
