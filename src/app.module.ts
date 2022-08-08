@@ -15,6 +15,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      url: process.env.DATABASE_URL,
       type: 'postgres',
       host: 'ec2-52-207-15-147.compute-1.amazonaws.com',
       port: 5432,
@@ -24,7 +25,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
       database: 'dfa3skhnktbvgt',
       entities: [UserEntity, PostEntity, CommentEntity],
       synchronize: false,
-      connectionString: process.env.DATABASE_URL,
       ssl: true,
       tls: {
         rejectUnauthorized: false,
