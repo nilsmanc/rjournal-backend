@@ -21,7 +21,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
       type: 'postgres',
       host: 'containers-us-west-101.railway.app',
       port: 5856,
-      username: 'hgqmttcurhqexj',
+      username: 'postgres',
       password: process.env.PASSWORD,
       database: 'railway',
       entities: [UserEntity, PostEntity, CommentEntity],
