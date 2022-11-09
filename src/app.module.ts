@@ -1,28 +1,30 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { CommentEntity } from './comment/entities/comment.entity';
 import { PostEntity } from './post/entities/post.entity';
 import { UserEntity } from './user/entities/user.entity';
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { AuthModule } from './auth/auth.module';
+import { DATABASE_URL, PASSWORD } from 'variables';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      url: process.env.DATABASE_URL,
+      url: DATABASE_URL,
       type: 'postgres',
-      host: 'ec2-52-207-15-147.compute-1.amazonaws.com',
-      port: 5432,
+      host: 'containers-us-west-101.railway.app',
+      port: 5856,
       username: 'hgqmttcurhqexj',
-      password:
-        '0a5bba9795553a7781e6c1b3e4498e8c87eb6aaecae9213f4a281c38b82f318f',
-      database: 'dfa3skhnktbvgt',
+      password: PASSWORD,
+      database: 'railway',
       entities: [UserEntity, PostEntity, CommentEntity],
       synchronize: false,
       ssl: true,

@@ -5,6 +5,7 @@ export interface OutputBlockData {
   type: any;
   data: any;
 }
+
 export class CreatePostDto {
   @IsString()
   title: string;
