@@ -19,8 +19,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     TypeOrmModule.forRoot({
       url: process.env.DATABASE_URL,
       type: 'postgres',
-      host: 'containers-us-west-101.railway.app',
-      port: 5856,
+      host: 'containers-us-west-112.railway.app',
+      port: 5598,
       username: 'postgres',
       password: process.env.PASSWORD,
       database: 'railway',
