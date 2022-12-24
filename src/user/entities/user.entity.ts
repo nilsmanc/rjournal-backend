@@ -1,4 +1,4 @@
-import { CommentEntity } from 'src/comment/entities/comment.entity';
+import { CommentEntity } from '../../comment/entities/comment.entity';
 import {
   Entity,
   Column,
